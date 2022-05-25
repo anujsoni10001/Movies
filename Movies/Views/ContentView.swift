@@ -9,8 +9,21 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        Text("Hello")
+        
+            .onAppear(){
+        
+        HTTPClient().getMoviesBy(search:"wanted") { result in
+            switch result{
+            case .success(let movies):
+            print(movies!)
+            case .failure(let error):
+            print(error)
+            print(error.localizedDescription)
+            }
+        }
+            }
     }
 }
 
