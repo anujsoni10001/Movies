@@ -7,6 +7,7 @@
 
 import Foundation
 
+//Supporting Component holding list of Models
 struct MovieResponse:Codable{
 let movies :[Movie]
 
@@ -15,18 +16,19 @@ case movies = "Search"
 }
 }
 
-
+//Model
 struct Movie:Codable{
 let title:String
 let year:String
-let imdbID:String
+let imdbId:String
 let poster:String
     
 private enum CodingKeys:String,CodingKey{
 case title = "Title"
 case year = "Year"
-case imdbID = "imdbID"
+case imdbId = "imdbID"
 case poster = "Poster"
 }
 }
+
 
