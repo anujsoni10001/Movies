@@ -14,10 +14,10 @@ struct ContentView: View {
         
             .onAppear(){
         
-        HTTPClient().getMoviesBy(search:"wanted") { result in
+            HTTPClient().getMovieDetailsBy(imdbId:"tt1204829"){ result in
             switch result{
             case .success(let movies):
-            print(movies!)
+            print(movies)
             case .failure(let error):
             print(error)
             print(error.localizedDescription)
