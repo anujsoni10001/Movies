@@ -7,21 +7,33 @@
 
 import Foundation
 
-class MovieListViewModel : ObservableObject{
+class MovieListViewModel : ViewModelBase{
     
 @Published var movies : [MovieViewModel] = [MovieViewModel]()
 let httpClient = HTTPClient()
     
 func searchByName(_ name :String){
-httpClient.getMoviesBy(search:name){ result in
+
+if name.isEmpty{
+    self.loadingState = .failed
+return
+}
+    
+    self.loadingState = .loading
+    
+httpClient.getMoviesBy(search:name.trimmedandEscaped()){ result in
     switch result{
     case .success(let movies):
         if let movie = movies {
             DispatchQueue.main.async{
             self.movies = movie.map(MovieViewModel.init)
+            self.loadingState = .success
             }
         }
     case .failure(let error):
+        DispatchQueue.main.async {
+            self.loadingState = .failed
+        }
     print(error.localizedDescription)
     }
 }

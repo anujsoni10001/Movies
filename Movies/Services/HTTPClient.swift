@@ -33,6 +33,7 @@ func getMoviesBy(search:String,completion:@escaping (Result<[Movie]?,NetworkErro
     
     //Decoding Succesfull else decodingError
     guard let movies = try? JSONDecoder().decode(MovieResponse.self, from: data) else {
+    print("Hello 123")
     return completion(.failure(.decodingError))
     }
     

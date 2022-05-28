@@ -9,13 +9,12 @@ import SwiftUI
 
 struct MovieListScreen: View {
     
-     @ObservedObject private var movieListVM:MovieListViewModel
+    @ObservedObject private var movieListVM:MovieListViewModel
     
     @State private var movieName:String = ""
       
       init(){
           self.movieListVM = MovieListViewModel()
-          self.movieListVM.searchByName("batman")
       }
     
     var body: some View {
@@ -28,10 +27,24 @@ struct MovieListScreen: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
             .padding(.horizontal)
             .padding(.vertical,10)
-                
             
+            
+            Spacer()
+            
+            .navigationTitle("Movies")
+            
+            
+            if movieListVM.loadingState == .success{
             MovieListView(movies: movieListVM.movies)
-                .navigationTitle("Movies")
+            }
+            else if movieListVM.loadingState == .failed{
+            FailedView()
+            }
+            else if movieListVM.loadingState == .loading{
+            LoadingView()
+            }
+                
+            Spacer()
                
         }
         .embedInNavigationView()
@@ -43,4 +56,5 @@ struct MovieListScreen_Previews: PreviewProvider {
         MovieListScreen()
     }
 }
+
 
