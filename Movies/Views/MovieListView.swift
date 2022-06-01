@@ -13,8 +13,10 @@ struct MovieListView: View {
 
     var body: some View {
         List(movies,id: \.imdbId){movie in
+        NavigationLink(destination:MovieDetailScreen(imdbId:movie.imdbId)){
             MovieCell(movie: movie)
             .padding(.vertical,4)
+            }
         }
     }
 }
@@ -54,3 +56,4 @@ struct MovieCell: View {
         }.contentShape(Rectangle())
     }
 }
+

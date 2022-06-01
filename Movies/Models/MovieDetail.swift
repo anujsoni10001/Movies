@@ -4,7 +4,6 @@
 //
 //  Created by Anuj Soni on 28/05/22.
 //
-
 import Foundation
 
 struct MovieDetail: Decodable {

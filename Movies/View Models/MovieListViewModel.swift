@@ -16,7 +16,7 @@ func searchByName(_ name :String){
 
 if name.isEmpty{
     self.loadingState = .failed
-return
+    return
 }
     
     self.loadingState = .loading
